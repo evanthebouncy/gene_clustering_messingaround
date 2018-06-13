@@ -9,16 +9,15 @@ from sklearn.cluster import KMeans
 
 X = pickle.load(open( "embedded_np.p", "rb" ))
 
-def get_score(i):
-  kmeans = KMeans(n_clusters=i, random_state=0).fit(X)
-  return kmeans.score(X)
+kmeans = KMeans(n_clusters=10, random_state=0).fit(X)
+asmt = kmeans.predict(X)
+print (asmt)
 
-scores = [get_score(i) for i in range(2, 16)]
+pickle.dump(asmt, open("row_asmt_np.p", "wb"))
 
-import matplotlib
-matplotlib.use("svg")
-import matplotlib.pyplot as plt
-
-x = range(2, 16)
-plt.scatter(x, scores)
-plt.savefig('cluster_score.png')
+# import matplotlib
+# matplotlib.use("svg")
+# import matplotlib.pyplot as plt
+# x = range(2, 16)
+# plt.scatter(x, scores)
+# plt.savefig('cluster_score.png')
